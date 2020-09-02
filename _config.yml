@@ -1,36 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@yunyezl 
-mmistakes
-/
-minimal-mistakes
-114
-7k11.9k
-Code
-Issues
-10
-Pull requests
-4
-Actions
-Projects
-Security
-Insights
-minimal-mistakes/_config.yml
-@smanjo
-smanjo Fix config comment to list all analytics providers. (#2607)
-…
-Latest commit a0309bb on 23 Jul
- History
- 26 contributors
-@mmistakes@d-Rickyy-b@ohadschn@Pradhyo@yihangho@LoveMeWithoutAll@YuyingWu@westes@vlajos@tony-ho@rriemann@raviriley
-281 lines (254 sloc)  7.97 KB
-  
 # Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your entire site, values
