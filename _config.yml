@@ -281,3 +281,4 @@ defaults:
       related: true
 
 category_list: [ dbp, os ]
+encoding: UTF-8
