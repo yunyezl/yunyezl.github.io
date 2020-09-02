@@ -15,6 +15,7 @@
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
+encoding : UTF-8
 locale                   : "en-US"
 title                    : "yunyezl blog"
 title_separator          : "-"
@@ -155,7 +156,7 @@ exclude:
   - .sass-cache
   - assets/js/plugins
   - assets/js/_main.js
-  - assets/js/vendor
+encoding: UTF-8  - assets/js/vendor
   - Capfile
   - CHANGELOG
   - config
@@ -281,4 +282,3 @@ defaults:
       related: true
 
 category_list: [ dbp, os ]
-encoding: UTF-8
