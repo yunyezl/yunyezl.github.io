@@ -1,3 +1,36 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@yunyezl 
+mmistakes
+/
+minimal-mistakes
+114
+7k11.9k
+Code
+Issues
+10
+Pull requests
+4
+Actions
+Projects
+Security
+Insights
+minimal-mistakes/_config.yml
+@smanjo
+smanjo Fix config comment to list all analytics providers. (#2607)
+…
+Latest commit a0309bb on 23 Jul
+ History
+ 26 contributors
+@mmistakes@d-Rickyy-b@ohadschn@Pradhyo@yihangho@LoveMeWithoutAll@YuyingWu@westes@vlajos@tony-ho@rriemann@raviriley
+281 lines (254 sloc)  7.97 KB
+  
 # Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your entire site, values
@@ -16,13 +49,13 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "yunyezl blog"
+title                    : "Site Title"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "yeji yun"
-description              : "Tous les aude"
-url                      : "https://yunyezl.github.io/" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  :  # the subpath of your site, e.g. "/blog"
+name                     : "Your Name"
+description              : "An amazing website."
+url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
@@ -93,10 +126,10 @@ analytics:
 
 # Site Author
 author:
-  name             : "yezl"
+  name             : "Your Name"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "공부 기록"
-  location         : "Seoul"
+  bio              : "I am an **amazing** person."
+  location         : "Somewhere"
   email            :
   links:
     - label: "Email"
@@ -155,7 +188,7 @@ exclude:
   - .sass-cache
   - assets/js/plugins
   - assets/js/_main.js
-encoding: UTF-8  - assets/js/vendor
+  - assets/js/vendor
   - Capfile
   - CHANGELOG
   - config
@@ -279,5 +312,15 @@ defaults:
       comments: # true
       share: true
       related: true
-
-category_list: [ dbp, os ]
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
