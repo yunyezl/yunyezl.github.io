@@ -1,12 +1,12 @@
 ---
-title:  "first post(test)"
+title:  ":)"
 excerpt: "DBP"
 
 categories:
-  - dbp
+  - database programming
 tags:
-  - database
+  - database, programming
 last_modified_at: 2019-04-13T08:06:00-05:00
 ---
 
-test
+테스트 게시글
