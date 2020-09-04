@@ -94,7 +94,7 @@ analytics:
 # Site Author
 author:
   name             : "yeji yun"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/ecofriendly.png"
   bio              : "공부 기록 블로그"
   location         : "Seoul"
   email            :
