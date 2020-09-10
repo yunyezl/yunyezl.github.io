@@ -1,6 +1,6 @@
 <?php
   // var_dump($_POST);
-  $link = mysqli_connect("localhost", "root", "rnrn382756", "dbp");
+  $link = mysqli_connect("localhost", "root", "rootroot", "dbp");
 
   $query = "
     INSERT INTO topic (
