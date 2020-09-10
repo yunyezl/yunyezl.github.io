@@ -1,6 +1,6 @@
 <?php
   $link = mysqli_connect('localhost', 'root', 'rootroot', 'dbp');
-  $query = "SELECT * FROM topic";
+  $query = "SELECT * FROM book";
   $result = mysqli_query($link, $query);
   $list = '';
 
@@ -15,7 +15,7 @@
   );
 
   if( isset($_GET['id']) ){
-  $query = "SELECT * FROM topic WHERE id = {$_GET['id']}";
+  $query = "SELECT * FROM book WHERE id = {$_GET['id']}";
   $result = mysqli_query($link, $query);
   $row = mysqli_fetch_array($result);
   $article = array(

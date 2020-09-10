@@ -3,8 +3,8 @@
   $link = mysqli_connect("localhost", "root", "rootroot", "dbp");
 
   $query = "
-    INSERT INTO topic (
-      title, description, created
+    INSERT INTO book (
+      title, description
       ) VALUE (
         '{$_POST['title']}',
         '{$_POST['description']}',
