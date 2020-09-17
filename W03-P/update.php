@@ -1,5 +1,5 @@
 <?php
-  $link = mysqli_connect('localhost', 'root', 'rnrn382756', 'dbp');
+  $link = mysqli_connect('localhost', 'root', 'rootroot', 'dbp');
   $query = "SELECT * FROM book";
   $result = mysqli_query($link, $query);
   $list = '';
