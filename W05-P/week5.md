@@ -15,10 +15,10 @@ last_modified_at: 2020-10-05T23:49:00-05:00
 
 ## 새로 배운 내용
 - 방화벽 상태 확인  <pre><code>sudo ufw status</code></pre>
-- apache 상태 확인 : sudo systemctl status apache2.service
-- maridadb 상태 확인 : sudo systemctl status mariadb
-- install : sudo apt install apache2 / sudo apt install php libapache2-mod-php php-mysql / sudo apt install mariadb-server
-- ip 주소 확인 : hostname -I
+- apache 상태 확인  <pre><code>sudo systemctl status apache2.service</code></pre>
+- maridadb 상태 확인 <pre><code>sudo systemctl status mariadb</code></pre>
+- install <pre><code>sudo apt install apache2 / sudo apt install php libapache2-mod-php php-mysql / sudo apt install mariadb-server</code></pre>
+- ip 주소 확인 <pre><code>hostname -I</code></pre>
 
 ### 문제가 생기거나 고민한 부분
 이번 실습에서는 오류가 나지 않았다.
