@@ -1,5 +1,5 @@
 ---
-title:  "[week5] 리눅스 환경에서 mariaDB "
+title:  "[week5] 리눅스 환경에서 mariaDB 실습하기"
 excerpt: "2020-2 SSWU Database programming 학습 일지"
 
 categories:
@@ -31,4 +31,4 @@ last_modified_at: 2020-10-05T23:49:00-05:00
 #### !
 > 2학년(무려 2년반 전..)때 컴퓨터 시스템 관리 수업에서 페도라 환경에서 실습한 적이 있는데, vmware를 재설치하니까 그 때 설치한 서버들이 그대로 남아있어서 놀랐다.
 
-[구동 영상]https://www.youtube.com/watch?v=xZRzIZMlTmI 
+[구동 영상](https://www.youtube.com/watch?v=xZRzIZMlTmI)
