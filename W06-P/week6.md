@@ -37,3 +37,4 @@ vscode 단축키 https://demun.github.io/vscode-tutorial/shortcuts/
 #### !
 > atom에서 vscode로 넘어가서 너무 좋았다. 기존에 사용하고 있던 편집기라 익숙했다. atom으로 수업을 들었을 때보다 생산성이 훨씬 나아진 것 같다.
 
+[구동 영상](https://youtu.be/APe_EKjr-k4)
