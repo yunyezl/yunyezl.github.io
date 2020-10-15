@@ -17,7 +17,7 @@ last_modified_at: 2020-10-15T23:00:00-05:00
 ### 1. 콜백메서드 재정의를 이용한 이벤트 처리
 * 상호 작용 주체가 View이므로 이벤트 콜백은 주로 View가 제공함.
 
-~~~Java
+~~~java
 public class HandleEvent1 extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class HandleEvent1 extends Activity {
 
 * 인터페이스 구현 객체를 생성하여 이벤트 처리
 
-~~~Java
+~~~java
 public class HandleEvent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,7 +104,7 @@ public class HandleEvent extends Activity implements View.OnTouchListener {
 위의 방식보다 코드는 짧아지지만 구조적으로 바람직하지 못하며 뷰의 독립성이 떨어진다.
 
 * View가 리스너를 구현
-~~~Java
+~~~java
 public class HandleEvent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -131,7 +131,7 @@ public class HandleEvent extends Activity {
 ~~~
 
 * 익명 내부 클래스를 이용하여 이벤트 처리
-~~~Java
+~~~java
 public class HandleEvent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -154,7 +154,7 @@ public class HandleEvent extends Activity {
 ~~~
 
 * 익명 내부 클래스의 임시 객체 생성
-~~~Java
+~~~java
 public class HandleEvent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -174,7 +174,7 @@ public class HandleEvent extends Activity {
 }
 ~~~
 
-### 3. onTouch() vs onTouchEvent  
+### 3. onTouch() vs onTouchEvent()   
 공부를 하다보니 한 가지 의문점이 생겼다. onTouch는 뭐고, onTouchEvent는 뭐지? 보아하니 콜백 메서드를 재정의하여 사용할 땐 onTouchEvent를 쓰고, 리스너를 사용할 때는 onTouch를 사용하는 것 같았다. 이해가 부족하여 자료를 찾아보았다.
 
 참고자료 : https://stackoverflow.com/questions/5002049/ontouchevent-vs-ontouch
