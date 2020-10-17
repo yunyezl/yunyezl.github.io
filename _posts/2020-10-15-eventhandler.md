@@ -1,5 +1,5 @@
 ---
-title:  "[Android] 안드로이드 이벤트 처리, onTouch() vs onTouchEvent()"
+title:  "[Android] 이벤트 처리, onTouch() vs onTouchEvent()"
 excerpt: "모바일 소프트웨어"
 
 categories:
@@ -82,7 +82,7 @@ public class HandleEvent extends Activity {
 인터페이스는 어떠한 클래스에서도 구현이 가능하다. 위처럼 별도의 클래스를 선언하여 인터페이스를 구현할 수도 있지만 Activity가 리스너를 구현할 수도 있고, 뷰가 리스너를 구현할 수도 있다.
 
 * Activity가 리스너를 구현
-~~~Java
+~~~java
 public class HandleEvent extends Activity implements View.OnTouchListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
