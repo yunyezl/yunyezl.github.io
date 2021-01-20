@@ -24,7 +24,8 @@
 결론적으로 이 문제는 효율성에서 틀렸다. 레벨4에 있는 문제 치고 쉬운데? 싶어서 효율성을 의심하긴 했으나, queries와 words를 각각 오름차순으로 정렬하고 하나씩 순회하다가 query의 길이보다 word의 길이가 커지면 종료하는 방식으로 풀면 되겠다 싶었는데, 효율성 1, 2, 3번에서 틀렸다.
 
 **틀린 풀이** 효율성 통과 못함
-‘’’Python
+
+'''python
 def solution(words, queries):
     result = {}
     
@@ -59,7 +60,7 @@ def solution(words, queries):
 일단 words에 담긴 원소의 최대 길이는 10000이므로, 10001개의 인덱스를 가진 array를 초기화한다. 각각의 인덱스에는 해당 인덱스만큼의 길이를 가지고 있는 문자열을 집어넣는다. 예를 들어, array[5]에는 frodo, front, frost, frame, kakao가 들어가게 되고, array[6]에는 frozen이 들어가게 되는 것이다. 그런 다음 array를 정렬하고, queries 배열을 돌면서 queries의 원소와 동일한 길이 단어를 가지고 있는 인덱스에 접근한 후 이분탐색을 한다. 여기서 bisect 이라는 라이브러리를 사용하는데, bisect_left는 정렬된 순서를 유지하면서 리스트 a에 데이터 x를 삽입할 가장 왼쪽 인덱스를 찾는 것이고, bisect_right는 정렬된 순서를 유지하면서 리스트 a에 데이터 x를 삽입할 가장 오른쪽 인덱스를 찾는 데에 사용된다. 같은 길이의 단어들을 담고있는 인덱스가 정렬되어있는 상태임을 이용하여,  쿼리가 들어갈 수 있는 마지막 위치와 첫번째 위치를 구하여 답을 도출할 수 있다. ‘A’와 ‘Z’로 각각 변경하는 이유는 ‘첫번째 위치’ 와 ‘마지막 위치’를 구하기 위함이다.
 그런데 이러한 방법만으로는 와일드카드가 접미사에 붙어있을 때를 해결할 수 없다. 따라서 reversed_array, 즉 원소들을 거꾸로 뒤집어 정렬한 배열을 하나 더 생성하고, queries 배열에 담겨있는 원소들도 마찬가지로 뒤집어 판별한다.
 
-‘’’Python
+'''python
 from bisect import bisect_left, bisect_right
 
 def count_by_range(a, left_value, right_value):
