@@ -1,0 +1,135 @@
+---
+title:  "static / dynamic library"
+excerpt: "그동안 아무 생각 없이 사용했던 라이브러리를 파헤쳐보자"
+
+categories:
+  - iOS
+tags:
+  - iOS
+last_modified_at: 2022-02-01T04:10:00-05:00
+---
+
+SPM으로 라이브러리를 추가하던 도중 궁금한 점이 생겼다.
+
+![Untitled](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/e07b4b19-94ff-4f7e-992b-d734f8e4a849/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220201%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220201T133312Z&X-Amz-Expires=86400&X-Amz-Signature=f1f4637a8f44e6de70abdcb14e0f82de60a3d5516e50aa0e02aa1cf9ad18cfed&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
+
+`Dynamic` 키워드가 붙은 라이브러리들이 눈에 들어왔다.
+
+dynamic이 붙은 건 뭐고, dynamic이 붙지 않은 건 뭐지? 궁금증이 생겨서 정리해보려고 한다.
+
+# Static Library
+
+위의 캡쳐에서 `Dynamic` 키워드가 붙지 않은 라이브러리가 static library다.
+
+static library는 아카이빙된 object file(`.o` 확장자)의 모음으로, `.a` 확장자 형태의 라이브러리이다. (OS에 따라 다름. macOS에 한정 )
+
+이러한 static library는 컴파일 타임에 executable(실행 바이너리)에 포함되어야 한다.
+
+macOS/iOS의 소스 코드를 컴파일하게 되면 object files가 생성되고, object file은 Mach-O 형식의 바이너리 데이터로 다음과 같은 내용들을 포함한다.
+
+- Header - 파일이 동작하는 아키텍처에 대한 정보 명시
+- Load Commands - 파일의 논리적인 흐름에 대한 정보 명시
+- Raw Segment Data - raw code와 data
+
+즉, object file은 기계어로 작성된 로직과 실행하는 데에 필요한 부가적인 정보들로 이루어져 있다고 생각하면 된다.
+
+- +) **Mach-O**
+    
+    > *Mach Object file format의 줄임말*이며, Mach는 Carnegie Mellon University에서 개발된 커널을 의미한다.
+    > 
+    
+    macOS, iOS, iPadOS, tvOS, watchOS에 사용되는 Apple의 XNU가 이러한 Mach를 기반으로 한다. (XNU : Apple에서 만든 OS 커널.)
+    
+    Mach-O는 OS-X의 native excutable format이고, shipping code에 선호되는 format 이다.
+    
+
+우리는 어떠한 언어(예를 들어 swift, java 등)로 코드를 작성할 때, 순수하게 해당 언어로 작성된 코드 뿐만 아니라 필요에 따라 라이브러리를 import 하여 사용한다.
+
+(나의 경우에 RxSwift라는 라이브러리를 적용하려고 했던 것)
+
+혹은 코드가 많아지면 하나의 파일을 여러가지 파일로 나누고, 목적에 맞는 코드끼리 모아 라이브러리를 만들기도 한다.
+
+이러한 라이브러리를 앱 내에서 사용하기 위해서는 라이브러리와 내가 작성한 소스 코드(컴파일 후 object file)를 병합하는 과정인 `Link`  작업이 필요하다. 
+
+# Static link
+
+![Untitled](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2a5cebc0-3c5a-42c3-87d7-5381763698a3/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220201%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220201T133330Z&X-Amz-Expires=86400&X-Amz-Signature=83ac45d1829622f3ba28feeb6d694f42434b5d89e9f5fc3a4e02908f6a200a6c&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
+
+프로젝트를 빌드하는 과정은 위와 같다.
+
+Source Code 영역은 programming language text의 모음이고(우리가 코딩 하면서 소스 코드를 적은 것), `Compiling` 과정을 통해 Object code file이 생성된다. 이러한 모든 Object code file은 실행 파일을 생성하기 위해  linker를 통해 연결된다.
+
+linker는 object file들을 하나로 합치고, 여기에 library를 합친다. 먼저 object file에 있는 동일한 섹션들을 하나의 chuck가 되고 이렇게 하나의 chuck가 된 파일은 라이브러리와 합쳐진다는 것이다. 이러한 과정을 **static linking**이라고 부른다.
+
+다음은 iOS에서 어플리케이션이 static library를 사용하는 구조이다.
+
+![Untitled](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b5c6b7b0-fa45-4e8d-a161-35dcb8ea8ca7/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220201%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220201T133412Z&X-Amz-Expires=86400&X-Amz-Signature=35e5030f2056b770495dd603ca6326e5faa90fef592d16ca5911c801879e03f3&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
+
+위에서 계속 말했던 것 처럼, source code와 static libraries는 static linker를 통해 하나의 어플리케이션 파일(executable file)로 병합되고 이는 라이브러리에 포함된 코드 전부를 앱 내에 포함시킨다. 이렇게 만들어진 어플리케이션 파일은 앱이 실행될 때 앱의 주소 공간에 로드되게 된다.
+
+여기까지 static library / static linking에 대해 알아보았다. 
+
+그렇다면 dynamic한 library는 무엇이고 왜 나오게 되었는가?
+
+static link에서 linker는 executable을 만들 때, `source code`와 `static libraries`를 executable 파일에 포함시킨다고 했다.
+
+이 말은 곧, 우리가 많은 static library를 사용하게 되면 executable 파일의 크기가 커진다는 의미이며, 이는 곧 앱의 lauch time을 느리게 만들고 많은 메모리를 사용하게 한다는 뜻이다.
+
+또한 static library는 linker를 통해 링킹 당시의 라이브러리를 실행 파일에 병합하기 때문에 라이브러리의 업데이트에 유연하지 않다. 라이브러리의 성능이 업데이트되면, 새로운 버전의 라이브러리와 앱의 oject file가 다시 link 되어야만 업데이트된 사항이 앱에 반영될 수 있다는 소리이다.
+
+이러한 static library의 특징 때문에 dynamic library가 나오게 된다.
+
+# Dynamic Library
+
+static library는 source code와 합쳐져 실행 파일에 포함되는 반면 dynamic library는 실행 파일에 라이브러리 코드가 포함되지 않는다. 대신 dynamic library에 대한 reference만 executable file에 포함되며, 앱이 실행될 때 앱 주소 공간에 로드된다. 
+
+![Untitled](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/192a4561-e6d2-426b-9da7-c87922f39132/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220201%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220201T133424Z&X-Amz-Expires=86400&X-Amz-Signature=1d913134d69a57bfb227aba12f255cdd0f7f60ea6c1a1fab7d7c9eee904f7359&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
+
+이러한 이유로 static library 대신 dynamic library를 사용하면 앱의 실행 파일의 용량은 줄어들게 된다.
+
+또한 static library를 사용하게 되면, 해당 라이브러리를 사용하는 각각의 프로그램은 각각의 실행 파일마다 동일한 static library를 포함한다. 이는 곧 중복되는 메모리가 존재한다는 의미이다.
+
+반면 dynamic library는 실행 파일에 라이브러리 코드를 포함하는 게 아니라 주소를 포함하기 때문에, 각각의 프로그램들은 메모리를 공유하게 되므로(단 한 개의 원본 라이브러리를 참조) 중복된 메모리가 존재하지 않게 된다. 이런 의미에서 dynamic library는 shared library라고도 불린다.
+
+다만 dynamic library는 주소 공간에 라이브러리를 Load 하는 데에 걸리는 시간이 필요하기 때문에, pre-main time이 다소 길어질 수 있고 이는 결국 launch time의 증가로 이어질 수도 있다.
+
+참고로 dynamic library를 사용하여 개발하는 것은 App store용으로 사용할 수 없다고 한다.  App store 에 배포되기 위해서는 애플의 심사를 거쳐야하는데, dynamic library를 사용하는 것은 심사 후에 앱이 수정될 가능성을 갖고 있기 때문이고 애플은 이를 허용하지 않기 때문이다.
+
+### 궁금증
+
+1. **slow launch time**
+
+static library의 large executable은 slow launch time을 만든다.
+
+또한 dynamic library를 사용할 경우 라이브러리를 로드하는 데에 걸리는 시간이 많이 들고, 따라서 pre-main time이 증가하고 이는 slow launch time로 이어질 수 있다. 
+
+둘 다 launch time을 증가시킬 가능성을 내포하고 있다면 어떤 게 더 빠른 launch time을 보장하는가?
+
+→ *일반적으로 성능 면에서는 static library가 우세하다고 한다. static library는 앱 실행 파일에 라이브러리가 직접 복사되어 있으므로 라이브러리를 가져오는 속도가 빠르기 때문이다. 그러나 dynamic library는 라이브러리의 참조만을 앱 실행 파일에 포함하고 있기 때문에 라이브러리를 호출하는 속도가 다소 lazy 할 수 있다고 한다.*
+
+2. **dynamic library의 loading과 linking**
+
+dynamic library는 메모리를 load 하는 데에 시간이 걸리고, 이로 인해 launch time이 증가할 수 있다.
+
+또한 dynamic library는 runtime 시점에 라이브러리와 Link 된다
+
+🤦‍♀️ : load? Link? 메모리에 load 되는 건 뭐고, runtime 시점에 link 되는 건 뭐지? 그래서 대체 언제 어떻게 라이브러리를 가져온다는 거지? runtime 시점에 link 된다면서, launch time이 증가하는 건 뭔 소리세요?
+
+이것 저것 찾아보고 내가 이해한 바로 정리해보면, dynamic library의 reference를 가지고 있는 프로그램을 실행하면 내부적으로 dynamic loader 라는 프로그램이 동작하여 다음과 같은 동작을 실행한다.
+
+1. dynamic link 된 공유 라이브러리를 찾아서 메모리에 적재(loading)
+2. entry function을 찾아서 호출 (호출 되기까지 걸리는 시간을 pre-main time이라고 함.)
+3. 프로그램 실행.
+
+이렇게 다이나믹 로더가 위와 같은 동작을 실행하고, 런타임 시점에 라이브러리가 필요할 때마다 메모리에 적재되어있는 라이브러리의 API를 호출하여 사용하는 듯 하다.
+
++) 위의 내용은 종속 라이브러리에 관한 내용(dependent library)이고, 앱이 실행 될 때 동적 라이브러리를 실행할 필요가 없는 경우에는 런타임 시점에 동적 라이브러리를 로드하도록 할 수 있다. (runtime loaded library) 이렇게 되면 launch time을 줄일 수 있게 된다. 
+
+runtime 시점에 link 한다면서, launch time이 증가하는 게 이해가 안됐는데 상충되는 개념이 아니라 동적 라이브러리가 두 가지로 나뉠 수 있는 것이다.
+
+### 참고
+- https://zeddios.tistory.com/1308
+- https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/OverviewOfDynamicLibraries.html#//apple_ref/doc/uid/TP40001873-SW2
+- https://medium.com/tokopedia-engineering/understanding-the-aspects-of-ios-app-launch-time-9b579534625f
+- https://hcn1519.github.io/articles/2019-09/dynamic_library
+- https://minsone.github.io/ios/mac/ios-framework-part-1-static-framework-dynamic-framework
